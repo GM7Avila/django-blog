@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-</head>
-<body>
-  <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-    <h1># Welcome!</h1>
-    <p>This is my blog page.</p>
-  </div>
-</body>
-</html>
+{% extends "blog/base-template.html" %}
+{% block content %}
+<h1><span style="color: #14507bcb">#</span> Hello World</h1>
+<p><i>Welcome to my personal blog!</i></p>
+
+    {% for post in posts %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_posted }}</small>
+          </div>
+          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <p class="article-content">{{ post.subtitle }}</p>
+        </div>
+      </article>
+    {% endfor %}
+    
+{% endblock %}
