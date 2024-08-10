@@ -1,9 +1,7 @@
 {% extends "blog/base-template.html" %}
 {% block content %}
-<h1><span style="color: #14507bcb">#</span> Hello World</h1>
+<h1><span style="color: #14507bcb">#</span> Home </h1>
 <hr class="mb-4">
-<p><i>Welcome to my personal blog!</i></p>
-
     {% for post in posts %}
       <article class="media content-section">
         <img class="rounded-circle article-img d-flex align-self-center mb-3" src="{{ post.author.profile.image.url }}">
