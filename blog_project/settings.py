@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -133,6 +134,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# MEDIA
+
+# The directory where uploaded media is stored.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# URL to use when referring to static files.
+MEDIA_URL = '/media/'
 
 # LOGIN SETTINGS
 ## redirect when user is logged in
