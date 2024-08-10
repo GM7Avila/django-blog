@@ -35,7 +35,7 @@
             <div class="navbar-nav">
               {% if user.is_authenticated %}
               <!-- Logout Button-->
-              <a class = "nav-item nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
+              <a class = "nav-item nav-link" href="{% url 'profile' %}">@{{ user.username }}</a>
               <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="ml-3 btn btn-outline-light">Logout</button>
