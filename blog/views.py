@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView  # CRUD
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from .models import Post
 
 class PostListView(ListView):
@@ -8,6 +9,7 @@ class PostListView(ListView):
   template_name = 'blog/home.html' 
   context_object_name = 'posts'
   ordering = ['-date_posted']
+  paginate_by = 5
 
 class PostDetailView(DetailView):
   model = Post
