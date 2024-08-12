@@ -107,3 +107,16 @@ header{
   color: #fff !important;
   outline: none;
 }
+
+/* Estilo padrão para o link "My Posts" */
+.list-group-item.list-group-item-light a {
+  color: inherit !important; /* Mantém a cor herdada do item da lista */
+  text-decoration: none !important; /* Remove o sublinhado */
+}
+
+/* Estilo quando o mouse passa por cima do link */
+.list-group-item.list-group-item-light a:hover,
+.list-group-item.list-group-item-light a:focus {
+  color: #007bff !important; /* Cor azul ao passar o mouse */
+  text-decoration: none !important; /* Continua sem sublinhado */
+}

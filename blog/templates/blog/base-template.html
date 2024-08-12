@@ -33,7 +33,7 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-              <a class = "nav-item nav-link" href="{% url 'profile' %}">@{{ user.username }}</a>
+              <a class = "nav-item nav-link" href="{% url 'profile' %}" data-toggle="tooltip" data-placement="bottom" title="Edit Profile">@{{ user.username }}</a>
               <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="ml-3 btn btn-outline-light">Logout</button>
@@ -65,10 +65,20 @@
             <h3>Explore</h3>
             <br>
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">🔥 Trending Topics</li>
-                <li class="list-group-item list-group-item-light">👥 Following</li>
-                <li class="list-group-item list-group-item-light">⌨️ My Posts</li>
-                <li class="list-group-item list-group-item-light">📥 Saved</li>
+                <li class="list-group-item list-group-item-light">
+                  🔥 <a href="#" data-toggle="tooltip" data-placement="top" title="Most popular topics">Trending Topics</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="list-group-item list-group-item-light">
+                  ⌨️ <a href="{% url 'user-posts' user.username %}">My Posts</a>
+                </li>
+                <li class="list-group-item list-group-item-light">
+                  👥 <a href="#">Following</a>
+                </li>
+                <li class="list-group-item list-group-item-light">
+                  📥 <a href="#">Saved</a>
+                </li>
+                {% endif %}
               </ul>
               <br>
               <p class='text-muted'>Staff</p>
@@ -96,6 +106,12 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
     
 </body>
 
