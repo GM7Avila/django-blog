@@ -51,8 +51,21 @@ class UserPostListView(ListView):
         if self.request.user.is_authenticated:
           likes = Like.objects.filter(user=self.request.user)
           liked_posts = likes.values_list('post_id', flat=True)
+          # Quando o usuario curtir um post, ele vai para o contexto, e no template é contado a quantidade de liked_
           context['liked_posts'] = liked_posts
         return context
+    
+class LikedPostListView(LoginRequiredMixin,ListView):
+  model = Post
+  template_name = 'blog/liked_posts.html'
+  context_object_name = 'posts'
+  paginate_by = 10
+
+  def get_queryset(self):
+    likes = Like.objects.filter(user=self.request.user)
+    liked_posts = likes.values_list('post_id', flat=True)
+    return Post.objects.filter(pk__in=liked_posts).order_by('-date_posted')
+
 
 class PostDetailView(DetailView):
   model = Post
