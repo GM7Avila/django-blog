@@ -15,7 +15,7 @@ class Post(models.Model):
   def __str__(self):
     return self.title
   
-  # Reverse URL for Post Detail
+  # Returns the url (with the pk) of the post-detail view
   def get_absolute_url(self):
     return reverse('post-detail', kwargs={'pk': self.pk})
   
@@ -27,6 +27,7 @@ class Like(models.Model):
     post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
+    # Each unique user can only like each post once
     class Meta:
         unique_together = ('user', 'post')
 
