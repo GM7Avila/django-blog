@@ -1,5 +1,4 @@
-from typing import Any
-from django.db.models.query import QuerySet
+from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView  # CRUD
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -24,7 +23,7 @@ class PostListView(ListView):
   template_name = 'blog/home.html' 
   context_object_name = 'posts'
   ordering = ['-date_posted']
-  paginate_by = 5
+  paginate_by = 10
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -62,9 +61,8 @@ class LikedPostListView(LoginRequiredMixin,ListView):
   paginate_by = 10
 
   def get_queryset(self):
-    likes = Like.objects.filter(user=self.request.user)
-    liked_posts = likes.values_list('post_id', flat=True)
-    return Post.objects.filter(pk__in=liked_posts).order_by('-date_posted')
+          liked_posts_ids = Like.objects.filter(user=self.request.user).order_by('-created').values_list('post_id', flat=True)
+          return Post.objects.filter(id__in=liked_posts_ids).order_by(models.Case(*[models.When(id=pk, then=pos) for pos, pk in enumerate(liked_posts_ids)]))
 
 
 class PostDetailView(DetailView):

@@ -22,7 +22,7 @@
     <form action="{% url 'like-post' object.pk %}" method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-like {% if liked %}liked{% endif %} mb-4"
-            data-toggle="tooltip" data-placement="top" title="{% if liked %}Descurtir{% else %}Curtir{% endif %}">
+            data-toggle="tooltip" data-placement="top" title="{% if liked %}Liked{% else %}Like{% endif %}">
             {% if liked %}💖 {{ object.likes.count }}
             {% else %}❤️ {{ object.likes.count }}{% endif %} 
         </button>
