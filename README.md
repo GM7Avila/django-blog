@@ -1,4 +1,4 @@
-# Avila's Community
+# Django Blog Community
 
 A Community Blog for discussions and posts about Computing and other topics.
 
